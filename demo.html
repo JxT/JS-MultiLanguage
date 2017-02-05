@@ -1,0 +1,100 @@
+<!doctype html>
+<meta charset="UTF-8"> 
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<style>
+
+#en, #fr, #cn, #jp {
+	display: none;
+}
+
+</style>
+
+<script type="text/javascript">
+
+	var x = null; //Initialise x
+
+	$(document).ready( function() {
+
+		x = document.body.getElementsByTagName('*');
+		var currentLang = getCookie("lang"); //en, cn, fr, jp, null
+
+		if (currentLang == null || currentLang == "") {
+			document.cookie = "lang=en";
+			switchLang('en'); 
+		}
+
+		else {
+			switchLang(currentLang);
+		}
+			
+	});
+
+	function getCookie(a) {
+	    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+	    return b ? b.pop() : '';
+	}
+
+	function switchLang(langName) {
+
+		var langs = ["en", "cn", "fr", "jp"];
+		langs.splice(langs.indexOf(langName), 1);
+
+		for (var i = 0; i < x.length; i++) {
+
+			if (x[i].id.indexOf(langName) != -1) {
+				x[i].style.display='block';
+			}
+
+			if (x[i].id.indexOf('langtog-' + langName) != -1) {
+				x[i].style.display='none';
+			}
+
+			for (var j = 0; j < langs.length; j++) {
+				if (x[i].id.indexOf(langs[j]) != -1) {
+					x[i].style.display = "none";
+				}
+
+				if (x[i].id.indexOf('langtog-' + langs[j]) != -1) {
+					x[i].style.display='block';
+				}
+			}
+		}
+		document.cookie = "lang="+langName;
+	}
+
+</script>
+
+</head>
+<body>
+	<div class='title'>
+		<div class='thing'><h1 id='en'>This is my amazing English title.</h1></div>
+		<p id='en'>Look at me I'm so fancy.</p>
+
+		<h1 id='fr'>This is my amazing French title.</h1>
+		<p id='fr'>Me voilà, si fancy.</p>
+
+		<h1 id='cn'>這是中文.</h1>
+		<p id='cn'>對對對。</p>
+
+		<h1 id='jp'>おはよう。</h1>
+		<p id='jp'>ございます。</p>
+	</div>
+	
+	<section class='content'>
+		<h5 id='en'>This content so swag. Yuh huh.</h5>
+		<h5 id='fr'>Me voilà, si fancy.</p>
+		<h5 id='cn'>對對對。</p>
+		<h5 id='jp'>ございます。</p>
+	</section>
+
+
+
+	<p><a id='langtog-en' href="#" onclick="switchLang('en'); return false;">English</a></p>
+	<p><a id='langtog-fr' href="#" onclick="switchLang('fr'); return false;">Français</a></p>
+	<p><a id='langtog-cn' href="#" onclick="switchLang('cn'); return false;">中文</a></p>
+	<p><a id='langtog-jp' href="#" onclick="switchLang('jp'); return false;">日本語</a></p>
+
+</body>
+</html>
