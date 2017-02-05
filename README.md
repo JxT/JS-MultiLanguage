@@ -19,8 +19,8 @@ Because you can just use cookies and JavaScript! It also means no reloading page
 
 - To start off, it creates a cookie setting the language to English (en). All elements with id ‘en’ are shown, and other elements tagged with a language are hidden.
 
-- So <div class=‘whatever’ id=‘en’> is shown
-and <div class=‘hooray’ id=‘jp’> is hidden!
+- So ```<div class=‘whatever’ id=‘en’>``` is shown
+and ```<div class=‘hooray’ id=‘jp’>``` is hidden!
 
 - Simples!
 
